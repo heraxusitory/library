@@ -17,10 +17,10 @@
     <div class="container">
         <h1 class="header-title">Library Books</h1>
         <ul class="nav">
-            <li class="nav-item"><a class="nav-link custom-link target" href="/">Books</a></li>
-            <li class="nav-item"><a class="nav-link custom-link target" href="?page=authors">Authors</a></li>
-            <li class="nav-item"><a class="nav-link custom-link target" href="?page=genres">Genre</a></li>
-            <li class="nav-item"><a class="nav-link custom-link target" href="?page=profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link custom-link target" href="{{route('books')}}">Books</a></li>
+            <li class="nav-item"><a class="nav-link custom-link target" href="{{route('authors')}}">Authors</a></li>
+            <li class="nav-item"><a class="nav-link custom-link target" href="{{route('genres')}}">Genres</a></li>
+            <li class="nav-item"><a class="nav-link custom-link target" href="{{route('profile')}}">Profile</a></li>
             @if (Route::has('login'))
                     @auth
                         <li class="nav-item"><a class="nav-link custom-link target" href="{{ url('/home') }}">Home</a></li>
