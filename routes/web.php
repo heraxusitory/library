@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/books', 'BookController@showBooks')->name('books');
+Route::get('/authors', 'AuthorController@showAuthors')->name('authors');
+Route::get('/genres', 'GenreController@showGenres')->name('genres');
+Route::get('/favourites', 'FavouriteController@showFavourites')->name('favourites');
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
