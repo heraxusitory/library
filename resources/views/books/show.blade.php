@@ -9,12 +9,14 @@
         <div class="img_block"></div>
     </div>
     <div class="col-sm-9">
-        <h5>Имя книги</h5>
-        <div>Имя автора</div>
-        <div>Имя жанра</div>
+        <h5>{{ $book->book_name }}</h5>
+        <div>{{ $book->author_name }}</div>
+        <div>{{ $book->genre_name }}</div>
     </div>
 </div>
-<p>
-    Описание книги
-</p>
+<div class="desc">
+    <h5>Описание</h5>
+    {{ $book->book_desc }}
+</div>
+</div>
 @endsection

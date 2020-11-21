@@ -11,28 +11,45 @@
 
     <!-- Подрубаем jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <head>
+</head>
 <body>
-<header class ="main-header">
+<header class="main-header">
     <div class="container">
         <h1 class="header-title">Library Books</h1>
         <ul class="nav">
             <li class="nav-item"><a class="nav-link custom-link target" href="{{route('books')}}">Books</a></li>
             <li class="nav-item"><a class="nav-link custom-link target" href="{{route('authors')}}">Authors</a></li>
             <li class="nav-item"><a class="nav-link custom-link target" href="{{route('genres')}}">Genres</a></li>
-            <li class="nav-item"><a class="nav-link custom-link target" href="{{route('profile')}}">Profile</a></li>
-            @if (Route::has('login'))
-                    @auth
-                        <li class="nav-item"><a class="nav-link custom-link target" href="{{ url('/home') }}">Home</a></li>
-                    @else
-                        <li class="nav-item"> <a class="nav-link custom-link target" href="{{ route('login') }}">Login</a></li>
 
-                        @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link custom-link target" href="{{ route('register') }}">Register</a></li>
-                        @endif
-                    @endauth
+            @if (Route::has('login'))
+                @auth
+                    <li class="nav-item"><a class="nav-link custom-link target" href="{{route('profile')}}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                    {{--                        <li class="nav-item"><a class="nav-link custom-link target" href="{{ url('/home') }}">Home</a></li>--}}
+                @else
+                    <li class="nav-item"><a class="nav-link custom-link target" href="{{ route('login') }}">Login</a>
+                    </li>
+
+                    @if (Route::has('register'))
+                        <li class="nav-item"><a class="nav-link custom-link target" href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endif
+                @endauth
             @endif
         </ul>
     </div>
 </header>
 <main class="main-content">
+    <div class="container custom-container">
+        <div id="content">

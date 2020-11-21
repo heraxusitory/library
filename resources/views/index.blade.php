@@ -1,9 +1,14 @@
-@include('layouts.header');
-<div class="container custom-container">
-    <div id="content">
+@include('layouts.header')
+@yield('content')
+@include('layouts.footer')
 
-    </div>
-</div>
-@include('layouts.footer');
+
+{{--@include('layouts.header');--}}
+{{--<div class="container custom-container">--}}
+{{--    <div id="content">--}}
+
+{{--    </div>--}}
+{{--</div>--}}
+{{--@include('layouts.footer');--}}
 
 
