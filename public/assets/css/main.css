@@ -85,3 +85,10 @@ a.custom-link:hover {
     color:black;
     text-decoration: underline;
 }
+
+.desc {
+    padding-top: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 20px;
+}
