@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->index();
             $table->string('name', 255);
-            $table->text('desc');
+            $table->longText('desc');
 //            $table->foreign('book_id')->references('id')->on('books');
         });
     }
