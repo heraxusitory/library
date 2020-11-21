@@ -13,17 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', 'BookController@showBooks')->name('books');
+Route::get('/books/{book_id}', 'BookController@showBook')->name('book.show');
+
+
+Route::prefix('profile')->middleware('auth')->group(function() {
+    Route::get('/', 'ProfileController@showProfile')->name('profile');
+    Route::get('/favourites/{user_id}', 'FavouriteController@showFavourites')->name('favourites');
 });
 
-Route::get('/books', 'BookController@showBooks')->name('books');
-Route::get('/authors', 'AuthorController@showAuthors')->name('authors');
-Route::get('/genres', 'GenreController@showGenres')->name('genres');
-Route::get('/favourites', 'FavouriteController@showFavourites')->name('favourites');
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
-Auth::routes();
+Route::prefix('authors')->group(function () {
+    Route::get('/', 'AuthorController@showAuthors')->name('authors');
+    Route::get('/{author_id}', 'AuthorController@showAuthor')->name('author.show');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('genres')->group(function() {
+    Route::get('/', 'GenreController@showGenres')->name('genres');
+    Route::get('/{genre_id}', 'GenreController@showGenre')->name('genre.show');
+});
+
+//Route::get('/yablad', function() {
+//   return redirect('404');
+//});
+//Route::get('404', function() {
+//    return redirect('page-not-found');
+//});
+
+Auth::routes();
