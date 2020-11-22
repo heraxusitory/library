@@ -8,7 +8,7 @@
                 <div class="img_block"></div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $book->book_name }}</h5>
-                    <p> class="card-text">
+                    <p class="card-text">
                         {{ $book->genre_name }}
                     </p>
                     <a href="{{ route('book.show', $book->book_id) }}" class="btn btn-primary target">Show</a>
