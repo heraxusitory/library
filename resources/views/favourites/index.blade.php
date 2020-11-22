@@ -1,23 +1,27 @@
 @extends('index')
 @section('content')
-<div class="d-flex flex-wrap justify-content-start">
-    <div class="card mt-4 favourite-drop-idbook" style="width: 21rem;">
-        <div class="img_block"></div>
-        <div class="card-body">
-            <h5 class="card-title">Название книги</h5>
-            <p class="card-text">
-            <div>Имя автора</div>
-            </p>
-            <div class='btn_clc'>
-                <a href="{{route('book.show', 1)}}" class="btn btn-primary">Show</a>
-                <form method="POST" action="app/handlers/handler.php" class="form_favourite_remove">
-                    <input type="hidden" name="book_id" value="idBook">
-                    <input type="hidden" name="action" value="remove">
-                    <input type="hidden" name="dropFavourite" value='true'>
-                    <button class="btn btn-primary remove-favourite">Delete from favourites</button>
-                </form>
-            </div>
+    <h3 class="content_title">Favourites</h3>
+    @if(count($books))
+        <div class="d-flex flex-wrap justify-content-start book-list">
+            @foreach($books as $book)
+                <div class="card mt-4 favourite-drop-idbook" style="width: 21rem;">
+                    <div class="img_block"></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $book->book_name }}</h5>
+                        <div class="card-text">{{ $book->author_name }}</div>
+                        <div class='btn_clc'>
+                            <a href="{{route('book.show', $book->book_id)}}" class="btn btn-primary">Show</a>
+                                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                <button class="btn btn-primary favourite-delete in-favourite" data-id="{{$book->book_id}}" data-url="{{ route('favourites.delete', $book->book_id) }}">
+                                    <img src="{{ asset('/assets/img/trash.svg') }}" >
+                                </button>
+                        </div>
 
+                    </div>
+                </div>
+            @endforeach
         </div>
-    </div>
+    @else
+        <div class="alert alert-secondary">Здесь ничего нет</div>
+    @endif
 @endsection

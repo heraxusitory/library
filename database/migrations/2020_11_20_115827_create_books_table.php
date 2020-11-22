@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->unsignedBigInteger('id')->index();
             $table->string('name', 255);
             $table->longText('desc');
+            $table->timestamps();
 //            $table->foreign('book_id')->references('id')->on('books');
         });
     }

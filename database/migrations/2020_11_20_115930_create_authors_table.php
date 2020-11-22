@@ -16,6 +16,7 @@ class CreateAuthorsTable extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->index();
             $table->string('name', 255);
+            $table->timestamps();
         });
     }
 

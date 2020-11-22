@@ -92,3 +92,7 @@ a.custom-link:hover {
     padding-right: 12px;
     margin-bottom: 20px;
 }
+
+.btn-rows {
+    margin: 10px 0;
+}
