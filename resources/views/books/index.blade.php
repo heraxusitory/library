@@ -16,23 +16,14 @@
                     </div>
 
                     <div class="btn_clc d-flex flex-wrap">
-                        <a href="{{route('book.show', $book->book_id)}}" class="btn btn-primary target">Show</a>
-                        <form method="POST" action="app/handlers/handler.php" class="">
-                            <input type="hidden" name="book_id" value="">
-                            <input type="hidden" name="action" value="">
-                            <button class="btn btn-primary">Add/Del to/from favourites</button>
-                        </form>
-
-                        <form method="POST" action="app/handlers/removeHandler.php">
-                            <input type="hidden" name="book_id" value="">
+                        <div>
+                            <a href="{{route('book.show', $book->book_id)}}" class="btn btn-primary target">Show</a>
+                            <button class="btn btn-primary" data-url="{{ route('favourites.add', $book->book_id) }}">Add to favourites</button>
+                        </div>
+                        <div>
                             <button class="btn btn-primary">Drop</button>
-                        </form>
-
-                        <form method="POST" action="app/handlers/editHandler.php">
-                            <input type="hidden" name="book_id" value="">
                             <button class="btn btn-primary">Edit</button>
-                        </form>
-
+                        </div>
                     </div>
                     <div class='fatal-error-favourite'></div>
                 </div>
