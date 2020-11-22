@@ -22,6 +22,11 @@ Route::prefix('profile')->middleware('auth')->group(function() {
     Route::get('/favourites/{user_id}', 'FavouriteController@showFavourites')->name('favourites');
 });
 
+Route::prefix('favourites')->middleware('auth')->group(function() {
+    Route::post('/add/{book_id}', 'FavouriteController@add')->name('favourites.add');
+    Route::delete('/delete/{book_id}', 'FavouriteController@delete')->name('favourites.delete');
+});
+
 Route::prefix('authors')->group(function () {
     Route::get('/', 'AuthorController@showAuthors')->name('authors');
     Route::get('/{author_id}', 'AuthorController@showAuthor')->name('author.show');
