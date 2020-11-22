@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function showAuthors(Author $authorM) {
-        $authors = $authorM->getAuthors();
+    public function showAuthors(BookAuthorGenre $bookAuthorGenre, Author $authorM) {
+//        $authors = $authorM->getAuthors();
+        $authors = $bookAuthorGenre->getAuthorsWithBookCount();
         return view('authors.index', compact('authors'));
     }
 
