@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     public function getGenres() {
-        return self::all();
+        return self::query()
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function getNameById($id) {

@@ -23,6 +23,7 @@ class BookAuthorGenre extends Model
             ->leftJoin('books', 'book_author_genres.book_id', '=', 'books.id')
             ->leftJoin('genres', 'book_author_genres.genre_id', '=', 'genres.id')
             ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
+            ->orderBy('book_id', 'desc')
             ->get();
     }
 
@@ -33,6 +34,7 @@ class BookAuthorGenre extends Model
             ->leftJoin('genres', 'book_author_genres.genre_id', '=', 'genres.id')
             ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
             ->where('author_id', $authorId)
+            ->orderBy('book_id', 'desc')
             ->get();
     }
     public function getBooksByGenreId($genreId) {
@@ -42,6 +44,7 @@ class BookAuthorGenre extends Model
             ->leftJoin('genres', 'book_author_genres.genre_id', '=', 'genres.id')
             ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
             ->where('genre_id', $genreId)
+            ->orderBy('book_id', 'desc')
             ->get();
     }
 
@@ -51,6 +54,7 @@ class BookAuthorGenre extends Model
             ->leftJoin('books', 'book_author_genres.book_id', '=', 'books.id')
             ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
             ->groupBy('author_id')
+            ->orderBy('author_id', 'desc')
             ->get();
     }
 }

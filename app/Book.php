@@ -27,6 +27,14 @@ class Book extends Model
            ->leftJoin('genres', 'book_author_genres.genre_id', '=', 'genres.id')
            ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
            ->where('book_id', $bookId)
+           ->orderBy('book_id', 'desc')
            ->first();
    }
+
+    public function findBookById($bookId) {
+        return $this->query()
+            ->where('id', $bookId)
+            ->first();
+    }
+
 }

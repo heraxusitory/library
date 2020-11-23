@@ -11,7 +11,7 @@ class BookController extends Controller
     public function showBooks(BookAuthorGenre $bookM)
     {
         $books = $bookM->getFullBooks();
-//        dd($books);
+//        dd($books)
         return view('books.index', compact('books'));
     }
 
@@ -19,5 +19,22 @@ class BookController extends Controller
     {
         $book = $bookM->getBookById($bookId);
         return view('books.show', compact('book'));
+    }
+
+    public function dropBook(Request $request, Book $bookM, $bookId) {
+        $book = $bookM->findBookById($bookId);
+        if (!empty($book)) {
+            $book->delete();
+            return response()->json([
+                'result' => true,
+                'status' => 'ok',
+                'message' => 'Droped',
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+            'status' => 'error',
+            'message' => 'Book not found',
+        ]);
     }
 }

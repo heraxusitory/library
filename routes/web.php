@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'BookController@showBooks')->name('books');
 Route::get('/books/{book_id}', 'BookController@showBook')->name('book.show');
+Route::delete('/drop/{book_id}', 'BookController@dropBook')->name('book.drop');
 
 
 Route::prefix('profile')->middleware('auth')->group(function() {
