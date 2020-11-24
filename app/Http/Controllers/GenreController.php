@@ -22,4 +22,22 @@ class GenreController extends Controller
         return redirect('404');
 
     }
+
+    public function create(Request $request, Genre $genreM)
+    {
+        if (empty($request->name)) {
+            $arrResponse = [];
+            $arrResponse['status'] = 'error';
+            $arrResponse['typeName'] = 'name';
+            $arrResponse['messageName'] = 'Field "name" is empty';
+            return response()->json($arrResponse);
+        }
+        $genreM->name = $request->name;
+        $genreM->save();
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'created',
+            'url' => route('genres'),
+        ]);
+    }
 }
