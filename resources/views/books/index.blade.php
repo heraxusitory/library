@@ -57,7 +57,7 @@
                         @auth
                             @if (Auth::user()->is_admin)
                                 <div class="d-flex justify-content-between">
-                                    <button class="btn btn-primary drop-book" data-id="{{$book->book_id}}"
+                                    <button class="btn btn-primary btn-danger drop-book" data-id="{{$book->book_id}}"
                                             data-url="{{ route('book.drop', $book->book_id) }}">Drop
                                     </button>
                                     <button class="btn btn-primary update-book" data-target="#modalWindow"

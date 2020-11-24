@@ -14,7 +14,7 @@ class CreateAuthorsTable extends Migration
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->index();
+            $table->unsignedBigInteger('id')->index()->autoIncrement();
             $table->string('name', 255);
             $table->timestamps();
         });

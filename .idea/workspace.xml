@@ -6,19 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="476ce1d0-9e89-4d7c-9d1f-bb15b690fbb9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Book.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Book.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/BookAuthorGenre.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/BookAuthorGenre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_20_115827_create_books_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_20_115827_create_books_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/authors/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/authors/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Author.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Author.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GenreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GenreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_20_115930_create_authors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_20_115930_create_authors_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_20_120024_create_genres_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_20_120024_create_genres_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/books/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/books/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/genres/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/genres/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/profile/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profile/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/genres/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/genres/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605710348024</updated>
       <workItem from="1605710349254" duration="747000" />
-      <workItem from="1606054928754" duration="59095000" />
+      <workItem from="1606054928754" duration="61966000" />
     </task>
     <servers />
   </component>
