@@ -1,8 +1,22 @@
 $(document).ready(function () {
 
+    // $("#modalWindow").modal('show');
     $('.book-list').on('click', '.favourite-add', addFavourite);
     $('.book-list').on('click', '.favourite-delete', deleteFavourite);
     $('.book-list').on('click', '.drop-book', dropBook);
+    // $('.book-list').on('click', '.update-book', updateBook);
+    $('.book-list').on('click', '.update-book', helpers.loadFormUpdateInModal);
+    $('.author-list').on('click', '.update-author', helpers.loadFormUpdateInModal);
+    $('.genre-list').on('click', '.update-genre', helpers.loadFormUpdateInModal);
+    $('#modalContent').on('submit', '.form-update', helpers.sendPUT);
+    $('#modalContent').on('submit', '.form-create', helpers.sendPUT);
+    $('.submit-modal').on('click', submitForm);
+
+    // function updateBook() {
+    // }
+    function submitForm(event) {
+        $('#modalContent').find('.form').submit();
+    }
 
     function dropBook() {
         let button = $(this);

@@ -1,46 +1,23 @@
 
 const helpers = {
 
-	loadFormUpdateInModal: (button) => {
+	loadFormUpdateInModal: (event) => {
+	    let button = $(event.currentTarget);
 		let modalWindow = $('#modalContent');
-		// console.log(button)
-		$.ajax({
-			url: '/app/handlers/getModal.php',
-			method: 'GET',
-			data: {
-				id: $(button).attr('data-item-id'),
-				modalType: $(button).attr('data-item-type'),
-				action: $(button).attr('data-action'),
-			},
-			dataType: 'json',
-			beforeSend: () => {
-				helpers.setLoader(modalWindow);
-			},
-			success: (data) => {
-				if (data.result) {
-					// Полученный контент (форма) вставляется в модалку
-					modalWindow.html(data.html);
-					// Получаем саму форму, и записываем ее в переменную
-					let formInModal = modalWindow.find('.form');
-					// если экшн был update
-					if ($(button).attr('data-action') == 'update') {
-						// то вешаем на нее обработчик события для update
-						formInModal.on('submit', helpers.updateInModal);
-					}
-					// Находим кнопку в модалке, которая не входит в форму, и вешаем на нее обработчик события на клик
-					$('#modalWindow').find('.submit-modal').on('click', function() {
-						// в самом обработчике мы сабмитим форму
-						formInModal.submit();
-					});
 
-				} else {
-					modalWindow.text(data.message);
-				}
-			},
-			error: (error)=> {
-				console.log(error);
-			}
-		});
+        $.ajax({
+            url: button.attr('data-url'),
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                modalWindow.html(data.html);
+                console.log('success');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
 	},
 
 	updateInModal: (event) => {
@@ -64,6 +41,39 @@ const helpers = {
 		});
 		return false;
 	},
+
+    sendPUT: (event) => {
+	    let form = $(event.currentTarget);
+
+        $.ajax({
+            url: form.attr('action'),
+            method: 'PUT',
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status === 'ok') {
+                    $(location).attr('href', data.url);
+                }
+                if (data.status === 'error') {
+                    if (data.typeName) {
+                        $('input[name="name"]').addClass('is-invalid');
+                    } else {
+                        $('input[name="name"]').removeClass('is-invalid');
+                    }
+                    if (data.typeDesc) {
+                        $('#description').addClass('is-invalid');
+                    } else {
+                        $('#description').removeClass('is-invalid');
+                    }
+                }
+                console.log(data);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+        return false;
+    }
 
 
 
