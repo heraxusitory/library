@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header">Administration</div>
                 <div class="card-body">
-                    Че нибудь по админской части
+                    @include('layouts.components.tables.userTable')
                 </div>
             </div>
         </div>
