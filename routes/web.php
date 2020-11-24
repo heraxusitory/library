@@ -16,6 +16,7 @@ Route::get('/', 'BookController@showBooks')->name('books');
 
 Route::prefix('genres')->middleware('admin')->group(function () {
     Route::get('/create/genre', 'ModalController@formGenreCreate')->name('genre.get.create');
+    Route::put('/create/', 'GenreController@create')->name('genre.create');
 });
 
 Route::prefix('books')->group(function () {
