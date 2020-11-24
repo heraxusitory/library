@@ -3,7 +3,8 @@ $(document).ready(function () {
     // $("#modalWindow").modal('show');
     $('.book-list').on('click', '.favourite-add', addFavourite);
     $('.book-list').on('click', '.favourite-delete', deleteFavourite);
-    $('.book-list').on('click', '.drop-book', dropBook);
+    $('.book-list').on('click', '.drop-book', drop);
+    $('.author-list').on('click', '.drop-author', drop);
     // $('.book-list').on('click', '.update-book', updateBook);
     $('.book-list').on('click', '.update-book', helpers.loadFormUpdateInModal);
     $('.author-list').on('click', '.update-author', helpers.loadFormUpdateInModal);
@@ -18,7 +19,7 @@ $(document).ready(function () {
         $('#modalContent').find('.form').submit();
     }
 
-    function dropBook() {
+    function drop() {
         let button = $(this);
         $.ajaxSetup({
             headers: {
@@ -35,7 +36,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 if (data.result) {
-                    if (button.hasClass('drop-book')) {
+                    if (button.hasClass('drop-book') || button.hasClass('drop-author')) {
                         button.parents('.card').remove();
                     }
                     console.log(data);

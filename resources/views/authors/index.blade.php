@@ -29,10 +29,20 @@
                                 <a href="{{route('author.show', $author->id)}}" class="btn btn-primary target">Show:
                                     <span></span></a>
                             </div>
-                            <div class="btn-group">
-                                <button class="btn btn-danger">Drop</button>
-                                <button class="btn btn-primary">Edit</button>
-                            </div>
+                            @auth
+                                @if (Auth::user()->is_admin)
+                                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                    <div class="btn-group">
+                                        <button class="btn btn-danger drop-author" data-id="{{ $author->id }}"
+                                                data-url="{{ route('author.drop', $author->id) }}">Drop
+                                        </button>
+                                        <button class="btn btn-primary update-author" data-target="#modalWindow"
+                                                data-toggle="modal" data-id="{{$author->id}}"
+                                                data-url="{{ route('author.get.edit', $author->id) }}">Edit
+                                        </button>
+                                    </div>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                 </div>

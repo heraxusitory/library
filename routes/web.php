@@ -36,6 +36,9 @@ Route::prefix('books')->group(function () {
 Route::prefix('authors')->middleware('admin')->group(function () {
     Route::get('/create/author', 'ModalController@formAuthorCreate')->name('author.get.create');
     Route::put('/create', 'AuthorController@create')->name('author.create');
+    Route::get('/edit/{author_id}', 'ModalController@formAuthorEdit')->name('author.get.edit');
+    Route::put('/edit/{author_id}', 'AuthorController@update')->name('author.update');
+    Route::delete('/drop/{author_id}', 'AuthorController@dropAuthor')->name('author.drop');
 });
 
 Route::prefix('profile')->middleware('auth')->group(function () {

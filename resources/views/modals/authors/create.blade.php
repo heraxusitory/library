@@ -1,4 +1,4 @@
-<form class="form form-create" method="POST" action="{{ route('author.create') }}">
+<form class="form form-update" method="POST" action="{{ route('author.update', $authorId) }}">
     @csrf
     <div class="form-group">
         <label for="author-name">Название автора</label>
