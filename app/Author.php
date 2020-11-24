@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-    public function getAuthors() {
-        return self::all();
+    public function getAuthors()
+    {
+        return $this->query()
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function getNameById($id) {
