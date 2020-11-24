@@ -8,9 +8,6 @@
     <link href="/assets/css/singin.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet" type="text/css">
     <link href="/assets/css/bootstrap-tools.css" rel="stylesheet" type="text/css">
-
-    <!-- Подрубаем jquery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <header class="main-header">
