@@ -81,7 +81,10 @@ class BookController extends Controller
     public function showBook(Book $bookM, $bookId)
     {
         $book = $bookM->getBookById($bookId);
-        return view('books.show', compact('book'));
+        if(!empty($book->book_id)){
+            return view('books.show', compact('book'));
+        }
+        return redirect('404');
     }
 
     public function dropBook(Request $request, Book $bookM, $bookId) {

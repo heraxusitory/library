@@ -1,9 +1,9 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>№</th>
-            <th>User Name</th>
-            <th>User @-mail</th>
+            <th>id</th>
+            <th>user name</th>
+            <th>user e-mail</th>
         </tr>
     </thead>
     <tbody>

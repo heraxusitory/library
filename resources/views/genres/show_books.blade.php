@@ -18,6 +18,6 @@
             @endforeach
         </div>
     @else
-        <div class="alert alert-secondary">Здесь ничего нет</div>
+        <div class="alert alert-secondary">There is nothing</div>
     @endif
 @endsection
