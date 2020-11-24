@@ -3,6 +3,27 @@
 @section('content')
     <h3 class="content_title">Books</h3>
     <div class="d-flex flex-wrap justify-content-start book-list">
+        @auth
+        @if (Auth::user()->is_admin)
+        <div class="card mt-4" style="width: 21rem;">
+            <div class="img_block"></div>
+            <div class="card-body">
+                <h5 class="card-title">Add new book</h5>
+                <div class="btn-rows">
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-primary update-book" data-target="#modalWindow"
+                                data-toggle="modal"
+                                data-url="{{ route('book.get.create') }}">
+                            <img src="{{ asset('/assets/img/addNewBook.svg') }}">
+                        </button>
+                    </div>
+                </div>
+                <div class='fatal-error-favourite'></div>
+            </div>
+        </div>
+        @endif
+        @endauth
+
         @foreach ($books as $book)
             <div class="card mt-4" style="width: 21rem;">
                 <div class="img_block"></div>
@@ -36,8 +57,13 @@
                         @auth
                             @if (Auth::user()->is_admin)
                                 <div class="d-flex justify-content-between">
-                                    <button class="btn btn-primary drop-book" data-id="{{$book->book_id}}" data-url="{{ route('book.drop', $book->book_id) }}">Drop</button>
-                                    <button class="btn btn-primary">Edit</button>
+                                    <button class="btn btn-primary drop-book" data-id="{{$book->book_id}}"
+                                            data-url="{{ route('book.drop', $book->book_id) }}">Drop
+                                    </button>
+                                    <button class="btn btn-primary update-book" data-target="#modalWindow"
+                                            data-toggle="modal" data-id="{{$book->book_id}}"
+                                            data-url="{{ route('book.get.edit', $book->book_id) }}">Edit
+                                    </button>
                                 </div>
                             @endif
                         @endauth
