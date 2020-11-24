@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Genre extends Model
 {
@@ -20,5 +21,15 @@ class Genre extends Model
         return self::query()
             ->where('id', $id)
             ->first();
+    }
+
+    public static function getGenresWithBookCount()
+    {
+        return self::query()
+            ->select(DB::raw('genres.id,COUNT(book_id) as books_count, genre_id, genres.name'))
+            ->leftJoin('book_author_genres', 'genres.id', '=', 'genre_id')
+            ->orderBy('genres.id','Desc')
+            ->groupBy('genres.id')
+            ->get();
     }
 }

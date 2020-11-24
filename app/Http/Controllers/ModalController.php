@@ -27,6 +27,11 @@ class ModalController extends Controller
         return response()->json(['html' => $form]);
     }
 
+    public function formGenreEdit(Genre $genreM, $genreId) {
+        $genre = $genreM->getById($genreId);
+        $form = view('modals.genres.edit', compact('genre', 'genreId'))->render();
+        return response()->json(['html' => $form]);
+    }
     public function formBookCreate(Author $authorM, Genre $genreM) {
         $authors = $authorM->getAuthors();
         $genres = $genreM->getGenres();

@@ -17,6 +17,9 @@ Route::get('/', 'BookController@showBooks')->name('books');
 Route::prefix('genres')->middleware('admin')->group(function () {
     Route::get('/create/genre', 'ModalController@formGenreCreate')->name('genre.get.create');
     Route::put('/create/', 'GenreController@create')->name('genre.create');
+    Route::delete('/drop/{genre_id}', 'GenreController@dropGenre')->name('genre.drop');
+    Route::get('/edit/{genre_id}', 'ModalController@formGenreEdit')->name('genre.get.edit');
+    Route::put('/edit/{genre_id}', 'GenreController@update')->name('genre.update');
 });
 
 Route::prefix('books')->group(function () {

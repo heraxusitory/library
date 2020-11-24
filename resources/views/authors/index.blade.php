@@ -27,7 +27,7 @@
                         <div class="d-flex justify-content-between mb-3">
                             <div>
                                 <a href="{{route('author.show', $author->id)}}" class="btn btn-primary target">Show:
-                                    <span></span></a>
+                                    <span>{{ $author->books_count }}</span></a>
                             </div>
                             @auth
                                 @if (Auth::user()->is_admin)

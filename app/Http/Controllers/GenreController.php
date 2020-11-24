@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     public function showGenres(Genre $genreM) {
-        $genres = $genreM->getGenres();
+//        $genres = $genreM->getGenres();
+        $genres = Genre::getGenresWithBookCount();
         return view('genres.index', compact('genres'));
     }
 
@@ -39,5 +40,41 @@ class GenreController extends Controller
             'message' => 'created',
             'url' => route('genres'),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (empty($request->name)) {
+            $arrResponse = [];
+            $arrResponse['status'] = 'error';
+            $arrResponse['typeName'] = 'name';
+            $arrResponse['messageName'] = 'Field "name" is empty';
+            return response()->json($arrResponse);
+        }
+
+        Genre::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return response()->json(['status' => 'ok', 'url' => route('genres')]);
+    }
+
+    public function dropGenre(Request $request, Genre $genreM, $genreId)
+    {
+        $genre = $genreM->getById($genreId);
+        if (!empty($genre)) {
+            $genre->delete();
+            return response()->json([
+                'result' => true,
+                'status' => 'ok',
+                'message' => 'Droped',
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+            'status' => 'error',
+            'message' => 'Genre not found',
+        ]);
+
     }
 }

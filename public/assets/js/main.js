@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('.book-list').on('click', '.favourite-delete', deleteFavourite);
     $('.book-list').on('click', '.drop-book', drop);
     $('.author-list').on('click', '.drop-author', drop);
+    $('.genre-list').on('click', '.drop-genre', drop);
     // $('.book-list').on('click', '.update-book', updateBook);
     $('.book-list').on('click', '.update-book', helpers.loadFormUpdateInModal);
     $('.author-list').on('click', '.update-author', helpers.loadFormUpdateInModal);
@@ -36,7 +37,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 if (data.result) {
-                    if (button.hasClass('drop-book') || button.hasClass('drop-author')) {
+                    if (button.hasClass('drop-book') || button.hasClass('drop-author') || button.hasClass('drop-genre')) {
                         if (confirm('Вы уверены?')){
                             button.parents('.card').remove();
                         }
