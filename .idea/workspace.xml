@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="476ce1d0-9e89-4d7c-9d1f-bb15b690fbb9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/components/tables/userTable.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/components/tables/userTable.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/authors/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/authors/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +171,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605710348024</updated>
       <workItem from="1605710349254" duration="747000" />
-      <workItem from="1606054928754" duration="67664000" />
+      <workItem from="1606054928754" duration="70881000" />
     </task>
     <servers />
   </component>

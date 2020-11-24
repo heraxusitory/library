@@ -11,7 +11,6 @@ class AuthorController extends Controller
     {
         $authors = $authorM->getAuthors();
         $authorsWithBookCount = $bookAuthorGenre->getAuthorsWithBookCount();
-//        dd($authorsWithBookCount);
         return view('authors.index', compact('authors', 'authorsWithBookCount'));
     }
 
