@@ -11,7 +11,12 @@ class Book extends Model
        return self::all();
    }
 
-   public function getBookById($bookId) {
+    public function getLastCreatedBook()
+    {
+        return $this->query()->latest('created_at')->first();
+    }
+
+    public function getBookById($bookId) {
        $select = [
            'books.id as book_id',
            'books.name as book_name',
