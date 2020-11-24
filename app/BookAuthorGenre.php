@@ -58,13 +58,4 @@ class BookAuthorGenre extends Model
             ->get();
     }
 
-    public function getAuthorsWithBookCount() {
-        return DB::table('book_author_genres')
-            ->select(DB::raw('COUNT(book_id) as books_count, authors.id as author_id,  ANY_VALUE(authors.name) as author_name' ))
-            ->leftJoin('books', 'book_author_genres.book_id', '=', 'books.id')
-            ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
-            ->groupBy('author_id')
-            ->orderBy('author_id', 'desc')
-            ->get();
-    }
 }

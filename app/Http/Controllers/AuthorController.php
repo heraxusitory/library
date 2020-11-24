@@ -10,7 +10,8 @@ class AuthorController extends Controller
     public function showAuthors(BookAuthorGenre $bookAuthorGenre, Author $authorM)
     {
         $authors = $authorM->getAuthors();
-        $authorsWithBookCount = $bookAuthorGenre->getAuthorsWithBookCount();
+        $authorsM = Author::getAuthorsWithBookCount();
+        dd($authorsM);
         return view('authors.index', compact('authors', 'authorsWithBookCount'));
     }
 

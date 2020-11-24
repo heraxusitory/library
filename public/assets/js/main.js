@@ -37,7 +37,9 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.result) {
                     if (button.hasClass('drop-book') || button.hasClass('drop-author')) {
-                        button.parents('.card').remove();
+                        if (confirm('Вы уверены?')){
+                            button.parents('.card').remove();
+                        }
                     }
                     console.log(data);
                 }
