@@ -27,6 +27,16 @@ class BookAuthorGenre extends Model
             ->get();
     }
 
+    public function getFullBookById($bookId) {
+        return DB::table('book_author_genres')
+            ->select($this->select)
+            ->leftJoin('books', 'book_author_genres.book_id', '=', 'books.id')
+            ->leftJoin('genres', 'book_author_genres.genre_id', '=', 'genres.id')
+            ->leftJoin('authors', 'book_author_genres.author_id', '=', 'authors.id')
+            ->where('books.id', $bookId)
+            ->first();
+    }
+
     public function getBooksByAuthorId($authorId) {
         return DB::table('book_author_genres')
             ->select($this->select)
