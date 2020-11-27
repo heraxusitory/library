@@ -22,7 +22,7 @@
 @endsection
 
 @section('comments')
-
+<div class="comments mb-4">
     <form class="comment_form" action="{{ route('comment.post.create', [$book->book_id, Auth::user()->id])}}"
     method="POST">
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -32,6 +32,7 @@
             <button>Отправить</button>
         </div>
     </form>
+</div>
 
     <div class="comments">
         <h5 class="title-comments">Комментарии (6)</h5>
