@@ -1,5 +1,4 @@
 </div>
-</div>
 </main>
 <footer>
     @include('modals.modal');

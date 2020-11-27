@@ -22,6 +22,8 @@ Route::prefix('genres')->middleware('admin')->group(function () {
     Route::put('/edit/{genre_id}', 'GenreController@update')->name('genre.update');
 });
 
+Route::post('/create_comment/{book_id}/{user_id}', 'CommentController@create')->name('comment.post.create');
+
 Route::prefix('books')->group(function () {
 
     Route::get('/{book_id}', 'BookController@showBook')->name('book.show');

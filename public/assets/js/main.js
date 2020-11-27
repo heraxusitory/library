@@ -14,6 +14,30 @@ $(document).ready(function () {
     $('#modalContent').on('submit', '.form-create', helpers.sendPUT);
     $('.submit-modal').on('click', submitForm);
 
+    $('.comment_form').on('submit', addComment);
+
+    function addComment(event) {
+        event.preventDefault();
+        let form = $(this);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method: 'POST',
+            url: form.attr('action'),
+                dataType:'json',
+                success: (data) => {
+                    console.log('успех');
+                },
+                error: (error) => {
+                    console.log('error');
+                }
+        });
+        return false;
+    }
+
     // function updateBook() {
     // }
     function submitForm(event) {
