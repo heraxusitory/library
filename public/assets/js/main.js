@@ -14,9 +14,9 @@ $(document).ready(function () {
     $('#modalContent').on('submit', '.form-create', helpers.sendPUT);
     $('.submit-modal').on('click', submitForm);
 
-    $('.comment_form').on('submit', addComment);
+    $('.comment_form').on('submit', addCommentForm);
 
-    function addComment(event) {
+    function addCommentForm(event) {
         event.preventDefault();
         let form = $(this);
         $.ajaxSetup({
@@ -26,13 +26,14 @@ $(document).ready(function () {
         });
         $.ajax({
             method: 'POST',
+            data: form.serialize(),
             url: form.attr('action'),
                 dataType:'json',
                 success: (data) => {
-                    console.log('успех');
+                    console.log(data);
                 },
                 error: (error) => {
-                    console.log('error');
+                    console.log(error);
                 }
         });
         return false;

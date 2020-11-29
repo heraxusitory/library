@@ -28,9 +28,15 @@
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <h5>Добавить комментарий:</h5>
         <textarea name="text_comment" cols="100" rows="4"></textarea>
+        @auth
         <div>
             <button>Отправить</button>
         </div>
+        @else
+            <div>
+                <button onclick="location.replace('/login')">Отправить</button>
+            </div>
+       @endauth
     </form>
 </div>
 
@@ -58,7 +64,7 @@
                                     laboriosam,
                                     nisi ut labore et aut reiciendis.
                                 </div>
-                                <div class="pull-right"><a class="btn btn-danger" href="#">Delete comment</a></div>
+{{--                                <div class="pull-right"><a class="btn btn-danger" href="{{ route('comment.delete') }}">Delete comment</a></div>--}}
                             </div>
                         </div>
                     </div>
