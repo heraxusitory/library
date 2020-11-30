@@ -9,10 +9,10 @@ class CommentController extends Controller
 {
 
     public function create(Request $request, Comment $commentM) {
-        if ($request->text_comment) {
+        if (strip_tags($request->text_comment)) {
             $commentM->user_id = $request->user_id;
             $commentM->page_id = $request->book_id;
-            $commentM->message = trim($request->text_comment);
+            $commentM->message = ($request->text_comment);
             $commentM->save();
             $comments = $commentM->getCommentsWithNameUsers($request->book_id);
             $count = $commentM->getCountComment($request->book_id);
@@ -22,7 +22,7 @@ class CommentController extends Controller
                 'status' => 'ok',
                 'user_id' => $request->user_id,
                 'book_id' => $request->book_id,
-                'comment' => trim($request->text_comment),
+                'comment' => $request->text_comment,
             ]);
         }
 

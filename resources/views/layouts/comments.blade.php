@@ -1,9 +1,9 @@
 <div class="comments">
-    <h5 class="title-comments">Комментарии (6)</h5>
+    <h5 class="title-comments">Комментарии ({{ $count->count }})</h5>
     <ul class="">
         @foreach($comments as $comment)
             <li class="media mb-4">
-                <div class="">
+                <div class="text-comment">
                     <div class="media-body">
                         <div class="panel panel-info">
                             <div class="panel-heading">
@@ -13,7 +13,7 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <div class="media-text text-justify"> {{$comment->message}} </div>
+                                <div class="text-comment">{!! nl2br(strip_tags($comment->message)) !!} </div>
                                 {{--                                <div class="pull-right"><a class="btn btn-danger" href="{{ route('comment.delete') }}">Delete comment</a></div>--}}
                             </div>
                         </div>

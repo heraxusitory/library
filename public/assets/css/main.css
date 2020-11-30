@@ -96,3 +96,7 @@ a.custom-link:hover {
 .btn-rows {
     margin: 10px 0;
 }
+
+.text-comment {
+    word-break: normal;
+}
