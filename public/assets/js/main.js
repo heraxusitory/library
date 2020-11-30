@@ -19,6 +19,7 @@ $(document).ready(function () {
     function addCommentForm(event) {
         event.preventDefault();
         let form = $(this);
+        let commentsContent = $('.comments');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -31,6 +32,26 @@ $(document).ready(function () {
                 dataType:'json',
                 success: (data) => {
                     console.log(data);
+                    $('.comment_form').find("textarea").val('');
+                    commentsContent.html(data.html);
+                    if (data.status === 'error') {
+                        $('.comment_form').find("textarea").addClass('is-invalid');
+                    } else {
+                        $('.comment_form').find("textarea").removeClass('is-invalid');
+                    }
+                    var date = new Date();
+
+                    var options = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        timezone: 'UTC',
+                        // hour: 'numeric',
+                        // minute: 'numeric',
+                    };
+
+                    console.log( date.toLocaleDateString("ru", options) ); // среда, 31 декабря 2014 г. н.э. 12:30:00
+                    // alert( date.toLocaleString("en-US", options) );
                 },
                 error: (error) => {
                     console.log(error);

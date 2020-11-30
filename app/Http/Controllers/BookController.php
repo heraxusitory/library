@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\BookAuthorGenre;
+use App\Comment;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -78,11 +79,13 @@ class BookController extends Controller
         return view('books.index', compact('books'));
     }
 
-    public function showBook(Book $bookM, $bookId)
+    public function showBook(Book $bookM, $bookId, Comment $commentM)
     {
+        $comments = $commentM->getCommentsWithNameUsers($bookId);
+        $count = $commentM->getCountComment($bookId);
         $book = $bookM->getBookById($bookId);
         if(!empty($book->book_id)){
-            return view('books.show', compact('book'));
+            return view('books.show', compact('book', 'comments', 'count'));
         }
         return redirect('404');
     }
