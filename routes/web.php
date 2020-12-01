@@ -23,7 +23,7 @@ Route::prefix('genres')->middleware('admin')->group(function () {
 });
 
 Route::post('/create_comment/{book_id}/{user_id}', 'CommentController@create')->name('comment.post.create');
-
+Route::delete('delete_comment/{book_id}/{comment_id}', 'CommentController@delete')->name('comment.delete');
 Route::prefix('books')->group(function () {
 
     Route::get('/{book_id}', 'BookController@showBook')->name('book.show');

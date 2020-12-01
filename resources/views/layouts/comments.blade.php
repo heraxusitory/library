@@ -1,20 +1,28 @@
 <div class="comments">
     <h5 class="title-comments">Комментарии ({{ $count->count }})</h5>
-    <ul class="">
+    <ul class="pl-2 pr-2">
         @foreach($comments as $comment)
-            <li class="media mb-4">
+            <li class="mb-4 comment-list">
                 <div class="text-comment">
                     <div class="media-body">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <div class="author"> {{$comment->name}} </div>
                                 <div class="metadata">
-                                    <span class="date">19 ноября 2015, 10:28</span>
+                                    <span class="date"> {{ $comment->date_comment }} </span>
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <div class="text-comment">{!! nl2br(strip_tags($comment->message)) !!} </div>
-                                {{--                                <div class="pull-right"><a class="btn btn-danger" href="{{ route('comment.delete') }}">Delete comment</a></div>--}}
+                                <p class="text-comment"> {!! nl2br(strip_tags($comment->message)) !!} </p>
+                                @auth
+                                    @if(Auth::user()->is_admin)
+                                        <div class="drop"><button class="btn btn-danger comment-delete"
+                                                                   data-url="{{ route('comment.delete', [$comment->page_id, $comment->id]) }}"
+                                                                        data-comment-id="{{ $comment->id }}"
+                                                                            data-page-id="{{ $comment->page_id }}">Delete
+                                            comment</button></div>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     </div>

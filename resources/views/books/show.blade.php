@@ -23,18 +23,19 @@
 
 @section('comments')
 <div class="mb-4">
+    @auth
     <form class="comment_form" action="{{ route('comment.post.create', [$book->book_id, Auth::user()->id??false])}}"
-    method="POST">
+          method="POST">
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <h5>Добавить комментарий:</h5>
         <textarea class="form-control col-md-6 mb-2" name="text_comment" cols="100" rows="4"></textarea>
-        @auth
         <div>
             <button>Отправить</button>
         </div>
         @else
             <div>
-                <button onclick="location.replace('/login')">Отправить</button>
+                <button class="btn-info" onclick="location.replace('/login')">
+                    Register or log in to post comments</button>
             </div>
        @endauth
     </form>

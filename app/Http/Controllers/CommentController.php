@@ -13,9 +13,13 @@ class CommentController extends Controller
             $commentM->user_id = $request->user_id;
             $commentM->page_id = $request->book_id;
             $commentM->message = ($request->text_comment);
+//            $commentM->created_at = date("F j, Y, H:i");
+//            $timestamp = strtotime( "February 26, 2007" );
+//            print date('Y-m-d', $timestamp );
             $commentM->save();
             $comments = $commentM->getCommentsWithNameUsers($request->book_id);
             $count = $commentM->getCountComment($request->book_id);
+            $dateCreatingComment = date("F j, Y, H:i");
             $html = view('layouts.comments', compact('comments', 'count'))->render();
             return response()->json([
                 'html' => $html,
@@ -31,6 +35,31 @@ class CommentController extends Controller
             'message' => 'comment is emty',
         ]);
 
+
+    }
+
+    public function delete(Request $request, Comment $commentM, $bookId, $commentId)
+    {
+        $comment = $commentM->getCommentById($commentId);
+        if (!empty($comment)) {
+            $comment->delete();
+            $comments = $commentM->getCommentsWithNameUsers($bookId);
+            $count = $commentM->getCountComment($bookId);
+            $html = view('layouts.comments', compact('comments', 'count'))->render();
+
+            return response()->json([
+                'html' => $html,
+                'comment_id' => $request->comment_id,
+                'result_comment' => true,
+                'status' => 'ok',
+                'message' => 'comment was droped',
+            ]);
+        }
+        return response()->json([
+            'result' => false,
+            'status' => 'error',
+            'message' => 'comment was not droped',
+        ]);
 
     }
 }

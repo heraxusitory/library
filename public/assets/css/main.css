@@ -97,6 +97,11 @@ a.custom-link:hover {
     margin: 10px 0;
 }
 
-.text-comment {
-    word-break: normal;
+p.text-comment {
+    /*word-break: normal;*/
+    word-wrap:break-word;
+}
+
+.comment-list {
+    list-style-type: none;
 }

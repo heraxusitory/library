@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('.submit-modal').on('click', submitForm);
 
     $('.comment_form').on('submit', addCommentForm);
-
+    $('.comment-delete').on('click', drop);
     function addCommentForm(event) {
         event.preventDefault();
         let form = $(this);
@@ -38,10 +38,11 @@ $(document).ready(function () {
                         $('.comment_form').find("textarea").addClass('is-invalid');
                     } else {
                         $('.comment_form').find("textarea").removeClass('is-invalid');
+                        $('.comments').find(".date").val('привет');
+                        $('.comment-delete').on('click', drop);
                     }
-                    var date = new Date();
-
-                    var options = {
+                    let date = new Date();
+                    let optionsDate = {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
@@ -49,8 +50,8 @@ $(document).ready(function () {
                         // hour: 'numeric',
                         // minute: 'numeric',
                     };
-
-                    console.log( date.toLocaleDateString("ru", options) ); // среда, 31 декабря 2014 г. н.э. 12:30:00
+                    console.log( date.toLocaleDateString("ru", optionsDate) );
+                    console.log(date.toLocaleTimeString("ru"));
                     // alert( date.toLocaleString("en-US", options) );
                 },
                 error: (error) => {
@@ -67,7 +68,11 @@ $(document).ready(function () {
     }
 
     function drop() {
+        if (!confirm('Are you sure?')) {
+            return;
+        }
         let button = $(this);
+        let commentsContent = $('.comments');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -77,6 +82,8 @@ $(document).ready(function () {
             method: 'DELETE',
             url: button.attr('data-url'),
             data: {
+                page_id:button.attr('data-page-id'),
+                comment_id: button.attr('data-comment-id'),
                 id: button.attr('data-id'),
                 _token: $('#token').val()
             },
@@ -84,12 +91,16 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.result) {
                     if (button.hasClass('drop-book') || button.hasClass('drop-author') || button.hasClass('drop-genre')) {
-                        if (confirm('Вы уверены?')){
+                        if (confirm('Are you sure?')){
                             button.parents('.card').remove();
                         }
                     }
-                    console.log(data);
                 }
+                if (data.result_comment) {
+                    commentsContent.html(data.html);
+                        $('.comment-delete').on('click', drop);
+                }
+                console.log(data);
             },
             error: function (error) {
                 console.log(error);
