@@ -22,11 +22,13 @@ Route::prefix('genres')->middleware('admin')->group(function () {
     Route::put('/edit/{genre_id}', 'GenreController@update')->name('genre.update');
 });
 
-Route::post('/create_comment/{book_id}/{user_id}', 'CommentController@create')->name('comment.post.create');
-Route::delete('delete_comment/{book_id}/{comment_id}', 'CommentController@delete')->name('comment.delete');
 Route::prefix('books')->group(function () {
 
     Route::get('/{book_id}', 'BookController@showBook')->name('book.show');
+
+    Route::middleware('auth')->group(function () {
+        Route::post('/create_comment/{book_id}/{user_id}', 'CommentController@create')->name('comment.post.create');
+    });
 
     Route::middleware('admin')->group(function () {
         Route::get('/edit/{book_id}', 'ModalController@formBookEdit')->name('book.get.edit');
@@ -34,6 +36,7 @@ Route::prefix('books')->group(function () {
         Route::get('/create/book', 'ModalController@formBookCreate')->name('book.get.create');
         Route::put('/create', 'BookController@create')->name('book.create');
         Route::delete('/drop/{book_id}', 'BookController@dropBook')->name('book.drop');
+        Route::delete('delete_comment/{book_id}/{comment_id}', 'CommentController@delete')->name('comment.delete');
     });
 
 });

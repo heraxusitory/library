@@ -14,17 +14,17 @@
                             </div>
                             <div class="panel-body">
                                 <p class="text-comment"> {!! nl2br(strip_tags($comment->message)) !!} </p>
-                                @auth
-                                    @if(Auth::user()->is_admin)
-                                        <div class="drop"><button class="btn btn-danger comment-delete"
-                                                                   data-url="{{ route('comment.delete', [$comment->page_id, $comment->id]) }}"
-                                                                        data-comment-id="{{ $comment->id }}"
-                                                                            data-page-id="{{ $comment->page_id }}">Delete
-                                            comment</button></div>
-                                    @endif
-                                @endauth
                             </div>
                         </div>
+                        @auth
+                            @if(Auth::user()->is_admin)
+                                <div class="drop"><button type="button" class="btn btn-danger comment-delete"
+                                                          data-url="{{ route('comment.delete', [$comment->page_id, $comment->id]) }}"
+                                                          data-comment-id="{{ $comment->id }}"
+                                                          data-page-id="{{ $comment->page_id }}">Delete
+                                        comment</button></div>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </li>

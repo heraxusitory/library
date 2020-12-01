@@ -91,9 +91,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.result) {
                     if (button.hasClass('drop-book') || button.hasClass('drop-author') || button.hasClass('drop-genre')) {
-                        if (confirm('Are you sure?')){
                             button.parents('.card').remove();
-                        }
                     }
                 }
                 if (data.result_comment) {
