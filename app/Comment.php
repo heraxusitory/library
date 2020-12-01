@@ -24,7 +24,7 @@ class Comment extends Model
             ->select(DB::raw('comments.id, user_id, users.name, page_id,
              message, comments.created_at,
               comments.updated_at as update_comment,
-               DATE_FORMAT(CURRENT_TIMESTAMP, "%d %M %y, %H:%i") as date_comment'))
+               DATE_FORMAT(comments.created_at, "%d %M %y, %H:%i") as date_comment'))
             ->leftJoin('users', 'comments.user_id', '=', 'users.id')
             ->orderBy('comments.created_at', 'desc')
             ->where('page_id', $page_id)
