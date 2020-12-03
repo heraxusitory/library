@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/search', 'BookController@search')->name('search.book');
 Route::get('/', 'BookController@showBooks')->name('books');
 
 Route::prefix('genres')->middleware('admin')->group(function () {

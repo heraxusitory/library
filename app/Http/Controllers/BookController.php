@@ -10,6 +10,22 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+
+    public function search(Request $request) {
+        if (!empty($request->search_field)) {
+            return response()->json([
+              'status' => 'ok',
+                'result' => true,
+                'message' => 'success',
+                ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+        ]);
+    }
+
+
     public function  create(Request  $request, Book $bookM, BookAuthorGenre $bookFull) {
         if (empty($request->name) || empty($request->desc)) {
             $arrResponse = [];

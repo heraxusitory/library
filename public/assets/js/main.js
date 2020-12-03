@@ -31,6 +31,33 @@ $(document).ready(function () {
         });
     }
 
+    $('.search-btn').on('click', searchBook);
+
+    function searchBook(event) {
+        event.preventDefault();
+        let form = $(this);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+       $.ajax({
+           method: "POST",
+           data: form.serialize(),
+           url: form.attr('action'),
+           dataType: 'json',
+           success: (data)=> {
+               console.log(data);
+
+           },
+           error: (error) => {
+               console.log(error);
+
+           }
+       });
+        return false;
+    }
+
     function prepareComments(comments) {
         let isHiddenComments = false;
         let countComments = comments.length;
