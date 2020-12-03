@@ -16,10 +16,50 @@ $(document).ready(function () {
 
     $('.comment_form').on('submit', addCommentForm);
     $('.comment-delete').on('click', drop);
+
+    prepareComments($('.comment-list'));
+
+    $('#show').on('click', showAllComments);
+
+    // $('#show').on('click', showAllComments($('.comment-list')));
+    //
+    function showAllComments() {
+       let comments = $('.comment-list');
+        comments.each(function (index, item) {
+            $(item).show();
+            $('#show').hide();
+        });
+    }
+
+    function prepareComments(comments) {
+        let isHiddenComments = false;
+        let countComments = comments.length;
+        if (countComments > 4) {
+            isHiddenComments = true;
+            comments.each(function (index, item) {
+                if (index > 3) {
+                    $(item).hide();
+                }
+            });
+        }
+        if (isHiddenComments) {
+            let container = $('.comments-container');
+            if ($(container.find('.comments-show')[0]).length === 0) {
+                // console.log(container);
+                // console.log(container.find('.comments-show'));
+               $(container[0]).append('<button type="button" id="show" class="comments-show">Show all comments</button>');
+                // $('#show').on('click', showAllComments($('.comment-list')));
+            }
+        }
+
+    }
+
+
+
     function addCommentForm(event) {
         event.preventDefault();
         let form = $(this);
-        let commentsContent = $('.comments');
+        let commentsContent = $('.comments-container');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -31,28 +71,17 @@ $(document).ready(function () {
             url: form.attr('action'),
                 dataType:'json',
                 success: (data) => {
-                    console.log(data);
                     $('.comment_form').find("textarea").val('');
                     commentsContent.html(data.html);
+                    prepareComments($('.comment-list'));
                     if (data.status === 'error') {
                         $('.comment_form').find("textarea").addClass('is-invalid');
                     } else {
                         $('.comment_form').find("textarea").removeClass('is-invalid');
-                        $('.comments').find(".date").val('привет');
                         $('.comment-delete').on('click', drop);
+                        $('.comment-list').show();
+                        $('#show').hide();
                     }
-                    let date = new Date();
-                    let optionsDate = {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        timezone: 'UTC',
-                        // hour: 'numeric',
-                        // minute: 'numeric',
-                    };
-                    console.log( date.toLocaleDateString("ru", optionsDate) );
-                    console.log(date.toLocaleTimeString("ru"));
-                    // alert( date.toLocaleString("en-US", options) );
                 },
                 error: (error) => {
                     console.log(error);
@@ -72,7 +101,7 @@ $(document).ready(function () {
             return;
         }
         let button = $(this);
-        let commentsContent = $('.comments');
+        let commentsContent = $('.comments-container');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -95,8 +124,16 @@ $(document).ready(function () {
                     }
                 }
                 if (data.result_comment) {
+                    console.log(data.html);
                     commentsContent.html(data.html);
-                        $('.comment-delete').on('click', drop);
+                    prepareComments($('.comment-list'));
+                    $('.comment-delete').on('click', drop);
+                   if ($('.comment-list').length > 4) {
+                       $('.comment-list').show();
+                       $('#show').hide();
+                   }
+
+
                 }
                 console.log(data);
             },
