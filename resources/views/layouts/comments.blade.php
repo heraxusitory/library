@@ -1,6 +1,6 @@
-<div class="comments">
+<div class="comments-container">
     <h5 class="title-comments">Комментарии ({{ $count->count }})</h5>
-    <ul class="pl-2 pr-2">
+    <ul class="pl-2 pr-2 list">
         @foreach($comments as $comment)
             <li class="mb-4 comment-list">
                 <div class="text-comment">

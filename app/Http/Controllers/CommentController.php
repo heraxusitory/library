@@ -19,8 +19,7 @@ class CommentController extends Controller
             $commentM->save();
             $comments = $commentM->getCommentsWithNameUsers($request->book_id);
             $count = $commentM->getCountComment($request->book_id);
-            $dateCreatingComment = date("F j, Y, H:i");
-            $html = view('layouts.comments', compact('comments', 'count'))->render();
+            $html = view('layouts.comments', compact('comments', 'count', 'conutVisibleComments'))->render();
             return response()->json([
                 'html' => $html,
                 'status' => 'ok',
