@@ -11,22 +11,48 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
 
-    public function search(Request $request) {
-        if (!empty($request->search_field)) {
+    public function search(Request $request)
+    {
+        $searchField = $request->search_field;
+        if (!empty($searchField)) {
+            $books = Book::getBooks();
+            $booksName = [];
+            $arrResponse = [];
+            $booksId = [];
+            foreach ($books as $book) {
+                $bookName = $book->name;
+                $bookId = $book->id;
+                if (mb_stripos($bookName, $searchField) !== false) {
+                    $booksName[] = $bookName;
+                    $booksId[] = $bookId;
+                     $arrResponse[] = [
+                         'book_id' => $book->id,
+                         'message' => 'Matches found',
+                         'strop' => mb_stripos($bookName, $searchField),
+                     ];
+                }
+            }
             return response()->json([
-              'status' => 'ok',
+                'books_name' => $booksName,
+                'books_id' => $booksId,
+                'response' => $arrResponse,
                 'result' => true,
-                'message' => 'success',
-                ]);
+                'status' => 'ok',
+                'message' => 'Book is not empty!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'result' => false,
+                'books_id' => false,
+            ]);
         }
 
-        return response()->json([
-            'status' => 'error',
-        ]);
     }
 
 
-    public function  create(Request  $request, Book $bookM, BookAuthorGenre $bookFull) {
+    public function create(Request $request, Book $bookM, BookAuthorGenre $bookFull)
+    {
         if (empty($request->name) || empty($request->desc)) {
             $arrResponse = [];
             $arrResponse['status'] = 'error';
@@ -70,7 +96,7 @@ class BookController extends Controller
 
             if (empty($request->desc)) {
                 $arrResponse['typeDesc'] = 'desc';
-                    $arrResponse['messageDesc'] = 'Field "description" is empty';
+                $arrResponse['messageDesc'] = 'Field "description" is empty';
             }
 
             return response()->json($arrResponse);
@@ -79,11 +105,11 @@ class BookController extends Controller
         Book::where('id', $id)->update([
             'name' => $request->name,
             'desc' => $request->desc,
-            ]);
-        BookAuthorGenre::where('book_id',  $id)->update([
+        ]);
+        BookAuthorGenre::where('book_id', $id)->update([
             'author_id' => $request->author_id,
-                'genre_id' => $request->genre_id,
-            ]);
+            'genre_id' => $request->genre_id,
+        ]);
 
         return response()->json(['status' => 'ok', 'url' => route('books')]);
     }
@@ -100,13 +126,14 @@ class BookController extends Controller
         $comments = $commentM->getCommentsWithNameUsers($bookId);
         $count = $commentM->getCountComment($bookId);
         $book = $bookM->getBookById($bookId);
-        if(!empty($book->book_id)){
+        if (!empty($book->book_id)) {
             return view('books.show', compact('book', 'comments', 'count'));
         }
         return redirect('404');
     }
 
-    public function dropBook(Request $request, Book $bookM, $bookId) {
+    public function dropBook(Request $request, Book $bookM, $bookId)
+    {
         $book = $bookM->findBookById($bookId);
         if (!empty($book)) {
             $book->delete();

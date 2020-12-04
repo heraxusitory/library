@@ -3,14 +3,12 @@
 @section('content')
     <h3 class="content_title">Books</h3>
     <div class="row justify-content-center ">
-        <form class="w-75" action="{{ route('search.book') }}" method="POST">
+        <form class="search w-75" action="{{ route('search.book') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
-                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                <input type="text"  name="search_field" class="form-control" placeholder="Найти" aria-label="Recipient's username"
-                       aria-describedby="button-addon2">
+                <input type="search" id="searchField"  name="search_field" class="form-control" placeholder="Найти">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary search-btn" type="button">Search</button>
+                    <button class="btn btn-outline-secondary" id="search_find">Search</button>
                 </div>
             </div>
         </form>
@@ -38,7 +36,7 @@
         @endauth
 
         @foreach ($books as $book)
-            <div class="card mt-4" style="width: 21rem;">
+            <div class="card book mt-4" data-id="{{ $book->book_id }}" style="width: 21rem;">
                 <div class="img_block"></div>
                 <div class="card-body">
                     <h5 class="card-title">{{$book->book_name}}</h5>
