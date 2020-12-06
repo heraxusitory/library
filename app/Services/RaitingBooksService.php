@@ -1,21 +1,18 @@
 <?php
 
+
 namespace App\Services;
 
-use App\Raiting;
-use Illuminate\Database\Eloquent\Model;
-
-class RaitingBooksService extends Model
+class RaitingBooksService
 {
-    public function calculateRaiting() {
-        $raitingTable = Raiting::getAll();
+    public function calculateRaiting($tableOfRaiting, $columnMark) {
         $sum = 0;
         $countElement = 0;
-        foreach ($raitingTable as $element) {
-            $sum += $element->mark;
+        foreach ($tableOfRaiting as $element) {
+            $sum += $element->$columnMark;
             $countElement++;
         }
-         return $arifmMean = $sum/$countElement;
+        return $arifmMean = $sum/$countElement;
 
     }
 }

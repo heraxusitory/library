@@ -26,7 +26,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <div class="btn-group">
-                                <button class="btn btn-info set-rating" data-star="1" type="button"
+                                <button class="btn btn-warning set-rating" data-star="1" type="button"
                                         style="box-shadow: none">
                                     <img src="{{ asset('/assets/img/favourite.svg') }}">
                                 </button>
@@ -47,7 +47,7 @@
                                     <img src="{{ asset('/assets/img/favourite.svg') }}">
                                 </button>
                             </div>
-                            <input type="hidden" name="rating">
+                            <input type="hidden" name="rating" value="1">
                             <button class="btn btn-success">Оценить</button>
                         </div>
                     </div>

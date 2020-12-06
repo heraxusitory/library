@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     function sendRaiting() {
         form = $(this);
-
+// console.log($('.form-group').find('input[name="rating"]').val());
         $.ajax({
             method: "POST",
             url: form.attr('action'),

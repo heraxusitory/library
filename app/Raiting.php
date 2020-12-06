@@ -12,8 +12,11 @@ class Raiting extends Model
         'mark'
     ];
 
-    public static function getAll()
+    public static function getAll($bookId)
     {
-        return self::all();
+        return self::query()
+            ->where('book_id', $bookId)
+            ->get();
+
     }
 }

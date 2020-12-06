@@ -30,7 +30,7 @@ Route::prefix('books')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('/create_comment/{book_id}/{user_id}', 'CommentController@create')->name('comment.post.create');
     });
-    Route::post('/calculate_raiting/{book_id}/{user_id}', 'RaitingController@calculateRaiting')->name('send.raiting');
+    Route::post('/calculate_raiting/{book_id}/{user_id}', 'RaitingController@prepareRaiting')->name('send.raiting');
 
     Route::middleware('admin')->group(function () {
         Route::get('/edit/{book_id}', 'ModalController@formBookEdit')->name('book.get.edit');

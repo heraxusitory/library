@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class RaitingController extends Controller
 {
-    public function calculateRaiting(Request $request, Raiting $raitingM, RaitingBooksService $rms, $bookId, $userId)
+    public function prepareRaiting(Request $request, Raiting $raitingM, RaitingBooksService $rms, $bookId, $userId)
     {
         if (!empty($request)) {
             $raiting = $request->rating;
@@ -25,7 +25,9 @@ class RaitingController extends Controller
                     'user_id' => $userId],
                     ['mark' => $raiting]
             );
-            $arifmSum = $rms->calculateRaiting();
+            $nameColumnMark = 'mark';
+            $raitingTable = Raiting::getAll($bookId);
+            $arifmSum = $rms->calculateRaiting($raitingTable, $nameColumnMark);
             return response()->json([
                 'book_id' => $bookId,
                 'user_id' => $userId,
