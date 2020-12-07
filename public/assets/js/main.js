@@ -74,17 +74,6 @@ $(document).ready(function () {
                 $(item).addClass('hidden');
                 let authorText = $(item).find('.author-card-text').text().trim();
                 let genreText = $(item).find('.genre-card-text').text().trim();
-                // console.log(authorText)
-                // console.log(genreText)
-                // console.log('================')
-                // if ((nameAuthor == 'Авторы') && (nameGenre == genreText)) {
-                //     $(item).show();
-                //     console.log(1);
-                // }
-                // else if ((nameGenre == 'Жанры') && (nameAuthor == authorText)) {
-                //     $(item).show();
-                //     console.log(2);
-                // }
                 if (nameGenre && nameAuthor) {
                     if ((nameGenre == genreText) && (nameAuthor == authorText)) {
                         $(item).show();
@@ -111,6 +100,7 @@ $(document).ready(function () {
                 return true;
             } else {
                 isFilterNotFound = false;
+                console.log(isFilterNotFound)
                 return isFilterNotFound;
             }
 
@@ -121,6 +111,7 @@ $(document).ready(function () {
             if ($('body').find('#not-found').length === 0) {
                 let info =filterBlock.append(infoTag)
             }
+        } else {$('body').find('#not-found').remove();
         }
 
     }
