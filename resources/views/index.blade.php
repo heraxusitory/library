@@ -1,5 +1,6 @@
 @include('layouts.header')
 @yield('content')
+@yield('raitings')
 @yield('comments')
 @include('layouts.footer')
 

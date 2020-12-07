@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="476ce1d0-9e89-4d7c-9d1f-bb15b690fbb9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/components/raitings/show_raiting.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RaitingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RaitingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Raiting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Raiting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/RaitingBooksService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/RaitingBooksService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/RaitingBooksService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_04_044746_create_raitings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_04_044746_create_raitings_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/books/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/books/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/comments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/components/comments/show_comments.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,11 +159,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\test\library\resources\views\layouts\components\comments" />
       <recent name="D:\OpenServer\domains\test\library\resources\views\layouts" />
       <recent name="D:\OpenServer\domains\test\library\public\assets" />
       <recent name="D:\OpenServer\domains\test\library\public\assets\js" />
       <recent name="D:\OpenServer\domains\test\library\resources\views" />
-      <recent name="D:\OpenServer\domains\test\library\resources\views\profile\favourites" />
     </key>
   </component>
   <component name="RunManager">
@@ -179,7 +185,7 @@
       <workItem from="1606401270559" duration="15112000" />
       <workItem from="1606683668481" duration="13049000" />
       <workItem from="1606730736206" duration="50534000" />
-      <workItem from="1606858694068" duration="77134000" />
+      <workItem from="1606858694068" duration="94860000" />
     </task>
     <servers />
   </component>

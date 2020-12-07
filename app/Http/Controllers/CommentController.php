@@ -19,7 +19,7 @@ class CommentController extends Controller
             $commentM->save();
             $comments = $commentM->getCommentsWithNameUsers($request->book_id);
             $count = $commentM->getCountComment($request->book_id);
-            $html = view('layouts.comments', compact('comments', 'count', 'conutVisibleComments'))->render();
+            $html = view('layouts.components.comments.show_comments', compact('comments', 'count', 'conutVisibleComments'))->render();
             return response()->json([
                 'html' => $html,
                 'status' => 'ok',
@@ -44,7 +44,7 @@ class CommentController extends Controller
             $comment->delete();
             $comments = $commentM->getCommentsWithNameUsers($bookId);
             $count = $commentM->getCountComment($bookId);
-            $html = view('layouts.comments', compact('comments', 'count'))->render();
+            $html = view('layouts.components.comments.show_comments', compact('comments', 'count'))->render();
 
             return response()->json([
                 'html' => $html,

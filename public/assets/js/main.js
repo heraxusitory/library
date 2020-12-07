@@ -17,7 +17,9 @@ $(document).ready(function () {
     $('.comment_form').on('submit', addCommentForm);
     $('.comment-delete').on('click', drop);
 
-    $('.raitng-form').on('submit', '#sendRating', sendRaiting);
+    $('#raiting-block').on('submit', '#sendRating', estimateRaiting);
+    $('#raiting-block').on('click', '.change-raiting', showRaiting);
+    $('#raiting-block').on('click', '.set-rating', tapStarRaitng);
 
     // $('#show').on('click', showAllComments($('.comment-list')));
     $('.search').on('submit', searchBook);
@@ -26,7 +28,23 @@ $(document).ready(function () {
 
     $('#comments-block').on('click', '#show', showAllComments);
 
-    function sendRaiting() {
+    function showRaiting() {
+        let button = $(this);
+        $.ajax({
+            method: 'GET',
+            url: button.attr('data-url'),
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                let raitingBlock = $('#raiting-block').html(data.html);
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+    }
+
+    function estimateRaiting() {
         form = $(this);
 // console.log($('.form-group').find('input[name="rating"]').val());
         $.ajax({
@@ -35,6 +53,8 @@ $(document).ready(function () {
             data: form.serialize(),
             dataType: 'json',
             success: (data) => {
+                let raitingBlock = $('#raiting-block').html(data.html);
+                console.log(raitingBlock);
                 console.log(data);
             },
             error: (error) => {
@@ -58,7 +78,7 @@ $(document).ready(function () {
 
     }
 
-    $('.set-rating').on('click', function() {
+    function tapStarRaitng() {
         let currentStar = $(this);
         let maxStars = 5;
         let parentBlock = currentStar.closest('div');
@@ -79,7 +99,7 @@ $(document).ready(function () {
             });
             // console.log(inputRating.val());
         }
-    });
+    };
 
     //
     function showAllComments() {

@@ -23,19 +23,32 @@ class RaitingController extends Controller
             Raiting::updateOrCreate([
                     'book_id' => $bookId,
                     'user_id' => $userId],
-                    ['mark' => $raiting]
+                    ['appreciated' => true, 'mark' => $raiting]
             );
             $nameColumnMark = 'mark';
             $raitingTable = Raiting::getAll($bookId);
-            $arifmSum = $rms->calculateRaiting($raitingTable, $nameColumnMark);
+            $prepareMiddleSum = $rms->calculateRaiting($raitingTable, $nameColumnMark);
+            $middleSum = round($prepareMiddleSum, 1, PHP_ROUND_HALF_UP);
+            $html = view('layouts.components.raitings.show_raiting', compact('middleSum','raiting', 'bookId'))->render();
             return response()->json([
+                'html' => $html,
                 'book_id' => $bookId,
                 'user_id' => $userId,
                 'status' => 'ok',
                 'result' => true,
                 'raiting' => $raiting,
-                'arifmSum' => $arifmSum
+                'middleSum' => $middleSum
             ]);
         }
+    }
+
+    public function changeRaiting(Raiting $raitingM, $bookId, $middleSum, $userId) {
+//        Raiting::updateOrCreate([
+//            'book_id' => $bookId,
+//            'user_id' => $userId],
+//            ['appreciated' => false]
+//        );
+        $html = view('layouts.components.raitings.estimate_raiting', compact('bookId', 'middleSum', 'userId'))->render();
+        return response()->json(['html' => $html]);
     }
 }

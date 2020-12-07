@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\BookAuthorGenre;
 use App\Comment;
+use App\Raiting;
+use App\Services\RaitingBooksService;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -121,13 +124,29 @@ class BookController extends Controller
         return view('books.index', compact('books'));
     }
 
-    public function showBook(Book $bookM, $bookId, Comment $commentM)
+    public function showBook(Book $bookM, $bookId, Comment $commentM, RaitingBooksService $rms, Raiting $raitingM)
     {
         $comments = $commentM->getCommentsWithNameUsers($bookId);
         $count = $commentM->getCountComment($bookId);
         $book = $bookM->getBookById($bookId);
+        $appreciated = false;
+        $userId = Auth::user()->id ?? false;
+        $nameColumnMark = 'mark';
+
         if (!empty($book->book_id)) {
-            return view('books.show', compact('book', 'comments', 'count'));
+            $raitingTable = Raiting::getAll($bookId);
+            $prepareMiddleSum = $rms->calculateRaiting($raitingTable, $nameColumnMark);
+            $middleSum = round($prepareMiddleSum, 1, PHP_ROUND_HALF_UP);
+        } else redirect('404');
+            if (!empty($userId)) {
+                if (!empty($raitingM->getByBookAndUserId($bookId, $userId))) {
+                    $raiting = $raitingM->getByBookAndUserId($bookId, $userId);
+                    $appreciated = $raiting->appreciated;
+                }
+            }
+
+        if (!empty($book->book_id)) {
+            return view('books.show', compact('book', 'comments', 'count', 'appreciated', 'middleSum', 'bookId'));
         }
         return redirect('404');
     }
