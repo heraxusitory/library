@@ -13,13 +13,10 @@ class CommentController extends Controller
             $commentM->user_id = $request->user_id;
             $commentM->page_id = $request->book_id;
             $commentM->message = ($request->text_comment);
-//            $commentM->created_at = date("F j, Y, H:i");
-//            $timestamp = strtotime( "February 26, 2007" );
-//            print date('Y-m-d', $timestamp );
             $commentM->save();
             $comments = $commentM->getCommentsWithNameUsers($request->book_id);
             $count = $commentM->getCountComment($request->book_id);
-            $html = view('layouts.components.comments.show_comments', compact('comments', 'count', 'conutVisibleComments'))->render();
+            $html = view('layouts.components.comments.show_comments', compact('comments', 'count'))->render();
             return response()->json([
                 'html' => $html,
                 'status' => 'ok',

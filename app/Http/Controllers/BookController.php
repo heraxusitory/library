@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Book;
 use App\BookAuthorGenre;
 use App\Comment;
+use App\Genre;
 use App\Raiting;
 use App\Services\RaitingBooksService;
 use http\Env\Response;
@@ -117,11 +119,12 @@ class BookController extends Controller
         return response()->json(['status' => 'ok', 'url' => route('books')]);
     }
 
-    public function showBooks(BookAuthorGenre $bookM)
+    public function showBooks(BookAuthorGenre $bookM, Author $authorM, Genre $genreM)
     {
         $books = $bookM->getFullBooks();
-//        dd($books)
-        return view('books.index', compact('books'));
+        $authors = $authorM->getAuthors();
+        $genres = $genreM->getGenres();
+        return view('books.index', compact('books', 'genres', 'authors'));
     }
 
     public function showBook(Book $bookM, $bookId, Comment $commentM, RaitingBooksService $rms, Raiting $raitingM)

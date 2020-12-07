@@ -1,7 +1,8 @@
 @extends('index')
 
 @section('content')
-    <h3 class="content_title">Books</h3>
+        <div class=""> <h3 class="content_title books">Books</h3></div>
+
     <div class="row justify-content-center ">
         <form class="search w-75" action="{{ route('search.book') }}" method="POST">
             @csrf
@@ -13,9 +14,30 @@
             </div>
         </form>
     </div>
-    <div class="d-flex flex-wrap justify-content-start book-list">
-        @auth
-            @if (Auth::user()->is_admin)
+        <div class="container ml-3 filter-block">
+            <div class="row">
+                <select name="authors" class="col col-md-1 form-control form-control-sm authors">
+                    <option hidden class="authors">Авторы</option>
+                    @foreach($authors as $author)
+                    <option value="{{ $author->name }}">{{ $author->name }}</option>
+                    @endforeach
+                </select>
+                <select name="genres" class="col col-md-1 form-control form-control-sm genres">
+                    <option hidden class="genres">Жанры</option>
+                    @foreach($genres as $genre)
+                        <option value="{{ $genre->name }}">{{ $genre->name }}</option>
+                    @endforeach
+                </select>
+                <div class="col ml-2">
+                    <button class="btn btn-secondary button-cancel-filter"><img src="{{ asset('/assets/img/cancel.svg') }}"></button>
+                    <button class="btn btn-info button-filter">Filter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-start book-list">
+            @auth
+                @if (Auth::user()->is_admin)
                 <div class="card mt-4" style="width: 21rem;">
                     <div class="img_block"></div>
                     <div class="card-body">
@@ -36,14 +58,14 @@
         @endauth
 
         @foreach ($books as $book)
-            <div class="card book mt-4" data-id="{{ $book->book_id }}" style="width: 21rem;">
+            <div class="card book mt-4" data-id="{{ $book->book_id }}"style="width: 21rem;">
                 <div class="img_block"></div>
                 <div class="card-body">
                     <h5 class="card-title">{{$book->book_name}}</h5>
-                    <div class="card-text">
+                    <div class="card-text author-card-text">
                         {{$book->author_name}}
                     </div>
-                    <div class="card-text">
+                    <div class="card-text genre-card-text">
                         {{$book->genre_name}}
                     </div>
 

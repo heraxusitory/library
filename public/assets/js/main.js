@@ -20,6 +20,9 @@ $(document).ready(function () {
     $('#raiting-block').on('submit', '#sendRating', estimateRaiting);
     $('#raiting-block').on('click', '.change-raiting', showRaiting);
     $('#raiting-block').on('click', '.set-rating', tapStarRaitng);
+    $('.filter-block').on('click', '.button-filter', filter);
+    $('.filter-block').on('click', '.button-cancel-filter', cancelFilter);
+
 
     // $('#show').on('click', showAllComments($('.comment-list')));
     $('.search').on('submit', searchBook);
@@ -27,6 +30,100 @@ $(document).ready(function () {
     prepareComments($('.comment-list'));
 
     $('#comments-block').on('click', '#show', showAllComments);
+
+    function cancelFilter() {
+       let defaultOptionAuthor = $('.filter-block .authors').find('option.authors');
+       let defaultOptionGenre = $('.filter-block .genres').find('option.genres');
+       defaultOptionAuthor.prop('selected', true);
+       defaultOptionGenre.prop('selected', true);
+        let cardBook = $('.card.book');
+        cardBook.each(function(index, item) {
+            $(item).show();
+        });
+        let info = $('body').find('#not-found');
+        if (info.length > 0) {
+            info.remove();
+         }
+    }
+
+    function filter() {
+        let optionsAuthor = $('.filter-block .authors').find('option');
+        let optionsGenre = $('.filter-block .genres').find('option');
+        let nameAuthor;
+        let nameGenre;
+        optionsAuthor.each(function(index, item) {
+            if ($(item).prop('selected')) {
+                nameAuthor = $(item).val();
+                if ($(item).hasClass('authors')) {
+                    nameAuthor = false;
+                }
+            }
+        });
+        optionsGenre.each(function(index, item) {
+            if ($(item).prop('selected')) {
+                 nameGenre = $(item).val();
+                 if ($(item).hasClass('genres')) {
+                    nameGenre = false;
+                }
+            }
+        });
+        let cardBook = $('.card.book');
+        if (nameGenre || nameAuthor) {
+            cardBook.each(function (index, item) {
+                $(item).hide();
+                $(item).addClass('hidden');
+                let authorText = $(item).find('.author-card-text').text().trim();
+                let genreText = $(item).find('.genre-card-text').text().trim();
+                // console.log(authorText)
+                // console.log(genreText)
+                // console.log('================')
+                // if ((nameAuthor == 'Авторы') && (nameGenre == genreText)) {
+                //     $(item).show();
+                //     console.log(1);
+                // }
+                // else if ((nameGenre == 'Жанры') && (nameAuthor == authorText)) {
+                //     $(item).show();
+                //     console.log(2);
+                // }
+                if (nameGenre && nameAuthor) {
+                    if ((nameGenre == genreText) && (nameAuthor == authorText)) {
+                        $(item).show();
+                        $(item).removeClass('hidden');
+                    } else {
+                        $(item).hide();
+                        $(item).addClass('hidden');
+                    }
+                } else {
+                    if ((nameGenre == genreText)) {
+                        $(item).show();
+                        $(item).removeClass('hidden');
+                    }
+                    if (nameAuthor == authorText) {
+                        $(item).show();
+                        $(item).removeClass('hidden');
+                    }
+                }
+            });
+        }
+        let isFilterNotFound = true;
+        cardBook.each(function (index, item) {
+            if (($(item).hasClass('hidden'))) {
+                return true;
+            } else {
+                isFilterNotFound = false;
+                return isFilterNotFound;
+            }
+
+        });
+        let filterBlock = $('.filter-block');
+        if (isFilterNotFound) {
+            let infoTag = $('<div class="alert alert-secondary" id="not-found">Nothing found</div>');
+            if ($('body').find('#not-found').length === 0) {
+                let info =filterBlock.append(infoTag)
+            }
+        }
+
+    }
 
     function showRaiting() {
         let button = $(this);
