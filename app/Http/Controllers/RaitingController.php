@@ -43,11 +43,6 @@ class RaitingController extends Controller
     }
 
     public function changeRaiting(Raiting $raitingM, $bookId, $middleSum, $userId) {
-//        Raiting::updateOrCreate([
-//            'book_id' => $bookId,
-//            'user_id' => $userId],
-//            ['appreciated' => false]
-//        );
         $html = view('layouts.components.raitings.estimate_raiting', compact('bookId', 'middleSum', 'userId'))->render();
         return response()->json(['html' => $html]);
     }

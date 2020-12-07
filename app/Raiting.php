@@ -24,6 +24,7 @@ class Raiting extends Model
     public function getByBookAndUserId($bookId, $userId) {
         return self::query()
             ->where('book_id', $bookId)
+            ->where('user_id', $userId)
             ->first();
     }
 }

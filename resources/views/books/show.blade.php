@@ -23,8 +23,7 @@
         <div id="raiting-block">
         @if(empty($appreciated))
         @include('layouts.components.raitings.estimate_raiting')
-        @endif
-    @if($appreciated)
+            @else
             @include('layouts.components.raitings.show_raiting')
         @endif
     </div>
